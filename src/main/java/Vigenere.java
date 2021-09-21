@@ -1,6 +1,23 @@
 import java.util.Scanner;
 
 public class Vigenere {
+    public static char encryptCaesarLetter(char ch, int key) {
+        key%=26;
+        if (ch >= 'A' && ch <= (char) ('Z' - key) || ch >= 'a' && ch <= (char) ('z' - key))
+            ch = (char) (ch + key);
+        else if (ch >= (char) ('Z' - key + 1) && ch <= 'Z' || ch >= (char) ('z' - key + 1) && ch <= 'z')
+            ch = (char) (ch - (26 - key));
+        return ch;
+    }
+
+    public static char decryptCaesarLetter(char ch, int key) {
+        key%=26;
+        if (ch >= (char) ('Z' - (26 - key)) && ch <= ('Z') || ch >= (char) ('z' - (26 - key)) && ch <= 'z')
+            ch = (char) (ch - key);
+        else if (ch >= 'A' && ch <= (char) ('A' + key) || ch >= 'a' && ch <= (char) ('a' + key))
+            ch = (char) (ch + (26 - key));
+        return ch;
+    }
     public static String encryptVigenere(String message, String key) {
         return message;
         // REPLACE THIS WITH YOUR CODE
@@ -14,6 +31,17 @@ public class Vigenere {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        System.out.println("Encrypting 'a' by 5 should give 'f', and got: " + encryptCaesarLetter('a', 5));
+        System.out.println("Encrypting 'y' by 8 should give 'g', and got: " + encryptCaesarLetter('y', 8));
+        System.out.println("Encrypting 'A' by 4 should give 'E', and got: " + encryptCaesarLetter('A', 4));
+        System.out.println("Encrypting 'Z' by 3 should give 'C', and got: " + encryptCaesarLetter('Z', 3));
+        System.out.println("Encrypting '#' by 5 should give '#', and got: " + encryptCaesarLetter('#', 5));
+        System.out.println();
+        System.out.println("Decrypting 'f' by 5 should give 'a', and got: " + decryptCaesarLetter('f', 5));
+        System.out.println("Decrypting 'g' by 8 should give 'y', and got: " + decryptCaesarLetter('g', 8));
+        System.out.println("Decrypting 'E' by 4 should give 'A', and got: " + decryptCaesarLetter('E', 4));
+        System.out.println("Decrypting 'C' by 3 should give 'Z', and got: " + decryptCaesarLetter('C', 3));
+        System.out.println("Decrypting '#' by 5 should give '#', and got: " + decryptCaesarLetter('#', 5));
 
         System.out.println("Would you like to \"encrypt\" or \"decrypt\" a message?");
         String command = scan.nextLine().trim().toLowerCase();
