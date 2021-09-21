@@ -63,7 +63,7 @@ public class Caesar {
         if (key >= 26) key %= 26;
         for (int i = 0; i < message.length(); i++) {
             char ch = message.charAt(i);
-            if (ch >= (char) ('Z' - (26 - key)) && ch <= ('Z') || ch >= (char) ('z' - (26 - key)) && ch <= 'z')
+            if (ch > (char) ('Z' - (26 - key)) && ch <= ('Z') || ch > (char) ('z' - (26 - key)) && ch <= 'z')
                 decrypted += (char) (ch - key);
             else if (ch >= 'A' && ch <= (char) ('A' + key) || ch >= 'a' && ch <= (char) ('a' + key))
                 decrypted += (char) (ch + (26 - key));

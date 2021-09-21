@@ -12,20 +12,40 @@ public class Vigenere {
 
     public static char decryptCaesarLetter(char ch, int key) {
         key%=26;
-        if (ch >= (char) ('Z' - (26 - key)) && ch <= ('Z') || ch >= (char) ('z' - (26 - key)) && ch <= 'z')
+        if (ch > (char) ('Z' - (26 - key)) && ch <= ('Z') || ch > (char) ('z' - (26 - key)) && ch <= 'z')
             ch = (char) (ch - key);
         else if (ch >= 'A' && ch <= (char) ('A' + key) || ch >= 'a' && ch <= (char) ('a' + key))
             ch = (char) (ch + (26 - key));
         return ch;
     }
     public static String encryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int count = 0;
+        String encrypted = "";
+        for(int i = 0;i<message.length();i++){
+            if (message.charAt(i)>='A'&&message.charAt(i)<='Z'||message.charAt(i)>='a'&&message.charAt(i)<='z') {
+                encrypted += encryptCaesarLetter(message.charAt(i), key.toLowerCase().charAt(count)-'a');
+                count++;
+            }
+            else encrypted+=message.charAt(i);
+            if (count==key.length())
+                count = 0;
+        }
+        return encrypted;
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int count = 0;
+        String decrypted = "";
+        for(int i = 0;i<message.length();i++){
+            if (message.charAt(i)>='A'&&message.charAt(i)<='Z'||message.charAt(i)>='a'&&message.charAt(i)<='z') {
+                decrypted += decryptCaesarLetter(message.charAt(i), key.toLowerCase().charAt(count)-'a');
+                count++;
+            }
+            else decrypted+=message.charAt(i);
+            if (count==key.length())
+                count = 0;
+        }
+        return decrypted;
     }
 
 
